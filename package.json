@@ -5,13 +5,17 @@
   "version": "1.0.0",
   "publisher": "your-publisher",
   "engines": {
-    "vscode": "^1.85.0",
+    "vscode": "^1.102.0",
     "node": "^18.0.0"
   },
   "categories": [
     "Other"
   ],
   "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:codeDigest.view",
+    "onCommand:codeDigest.create"
+  ],
   "contributes": {
     "commands": [
       {
@@ -113,5 +117,9 @@
     "fast-glob": "^3.3.3",
     "ignore": "^5.3.2",
     "minimatch": "^9.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrzeeshanahmed/code-digest.git"
   }
 }
