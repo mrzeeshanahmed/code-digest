@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Digest</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Create Code Digest</h2>
+        <p class="subtitle">Gitingest-style local digest</p>
+        
+        <form id="digestForm">
+            <div class="form-group">
+                <label for="outputFileName">Output File:</label>
+                <input type="text" id="outputFileName" placeholder="digest.txt">
+            </div>
+
+            <div class="form-group">
+                <label for="mode">Mode:</label>
+                <select id="mode">
+                    <option value="curated">Curated (common code files)</option>
+                    <option value="allText">All text-like files</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="respectGitignore"> Respect .gitignore
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="includeDotfiles"> Include dotfiles
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="includeGitDir"> Include .git directory
+                </label>
+                <small class="warning">⚠️ May include sensitive data and large files</small>
+            </div>
+
+            <div class="form-group">
+                <label for="maxFileSizeKB">Max file size (KB):</label>
+                <input type="number" id="maxFileSizeKB" min="1" max="102400">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="includeBinary"> Include binary files
+                </label>
+                <small class="warning">⚠️ May produce very large output</small>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalIncludeGlobs">Additional include patterns:</label>
+                <textarea id="additionalIncludeGlobs" placeholder="*.config&#10;**/*.yml" rows="2"></textarea>
+                <small>One glob pattern per line</small>
+            </div>
+
+            <div class="form-group">
+                <label for="additionalExcludeGlobs">Additional exclude patterns:</label>
+                <textarea id="additionalExcludeGlobs" placeholder="*.temp&#10;cache/**" rows="2"></textarea>
+                <small>One glob pattern per line</small>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="markdownCodeFences"> Use markdown code fences
+                </label>
+                <small>Only applies to .md output files</small>
+            </div>
+
+            <button type="button" id="generateBtn" class="generate-btn">
+                Generate Digest
+            </button>
+        </form>
+
+        <div id="progress" class="progress hidden">
+            <div class="spinner"></div>
+            <span id="progressText">Generating digest...</span>
+        </div>
+
+        <div id="results" class="results hidden">
+            <h3>Results</h3>
+            <div id="resultsContent"></div>
+            <button type="button" id="openFileBtn" class="open-btn">Open Digest File</button>
+        </div>
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "name": "code-digest",
+  "displayName": "Code Digest",
+  "description": "Generate Gitingest-style prompt-friendly code digests",
+  "version": "1.0.0",
+  "publisher": "your-publisher",
+  "engines": {
+    "vscode": "^1.85.0",
+    "node": "^18.0.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeDigest.create",
+        "title": "Code Digest: Create Digest"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codeDigest",
+          "title": "Code Digest",
+          "icon": "resources/icon.png"
+        }
+      ]
+    },
+    "views": {
+      "codeDigest": [
+        {
+          "id": "codeDigest.view",
+          "name": "Code Digest",
+          "type": "webview",
+          "icon": "resources/icon.png",
+          "when": "workbenchState != empty"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Code Digest",
+      "properties": {
+        "codeDigest.outputFileName": {
+          "type": "string",
+          "default": "digest.txt",
+          "description": "Name of the output file (supports .txt or .md)"
+        },
+        "codeDigest.mode": {
+          "type": "string",
+          "enum": [
+            "curated",
+            "allText"
+          ],
+          "default": "curated",
+          "description": "File inclusion mode"
+        },
+        "codeDigest.respectGitignore": {
+          "type": "boolean",
+          "default": true,
+          "description": "Respect .gitignore and apply default excludes"
+        },
+        "codeDigest.includeDotfiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include dotfiles and config files"
+        },
+        "codeDigest.includeGitDir": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include .git directory"
+        },
+        "codeDigest.maxFileSizeKB": {
+          "type": "number",
+          "default": 10240,
+          "description": "Maximum file size in KB"
+        },
+        "codeDigest.includeBinary": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include binary files (as base64 if needed)"
+        },
+        "codeDigest.additionalIncludeGlobs": {
+          "type": "array",
+          "default": [],
+          "description": "Additional glob patterns to include"
+        },
+        "codeDigest.additionalExcludeGlobs": {
+          "type": "array",
+          "default": [],
+          "description": "Additional glob patterns to exclude"
+        },
+        "codeDigest.markdownCodeFences": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use markdown code fences for content blocks"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^18.19.122",
+    "@types/vscode": "^1.102.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "ignore": "^5.3.2",
+    "minimatch": "^9.0.5"
+  }
+}
