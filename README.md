@@ -1,107 +1,74 @@
-# Code Digest Extension
+# Code Digest VS Code Extension
 
-A VS Code extension for code digest features.
-
-## Structure
-
-```
-├── package.json
-├── tsconfig.json
-├── src/
-│   ├── extension.ts
-│   ├── panels/
-│   │   └── SidebarProvider.ts
-│   ├── utils/
-│   │   ├── ignore.ts
-│   │   ├── tree.ts
-│   │   ├── binary.ts
-│   │   └── tokens.ts
-│   └── webview/
-│       ├── index.html
-│       ├── main.js
-│       └── styles.css
-└── README.md
-```
-
-
-# Code Digest - VS Code Extension
-
-Generate Gitingest-style prompt-friendly digests of your local codebase.
+Code Digest is a Visual Studio Code extension that generates a prompt-friendly digest of your local workspace. The digest includes a directory tree, per-file content blocks, and summary information, making it easy to share or analyze your codebase.
 
 ## Features
+- Sidebar UI for configuration and digest generation
+- Directory tree view of your workspace
+- Select file extensions to export
+- Exclude binary, image, video, and document files
+- Output digest as `.txt` or `.md` file
+- Saves digest to workspace root and opens it automatically
+- Works entirely locally (no cloud dependencies)
 
-- **Local Processing**: No network calls, everything runs locally
-- **Sidebar UI**: Easy-to-use interface in VS Code sidebar
-- **Flexible Filtering**: Choose between curated mode (common code files) or all text files
-- **Gitignore Support**: Respects .gitignore and .gitingestignore files
-- **Binary Handling**: Skip or include binary files with base64 encoding
-- **Custom Patterns**: Add your own include/exclude glob patterns
-- **Markdown Support**: Optional code fences for .md output files
+## Installation
+
+1. **Clone the repository:**
+	```sh
+	git clone https://github.com/mrzeeshanahmed/code-digest.git
+	cd code-digest
+	```
+
+2. **Install dependencies:**
+	```sh
+	npm install
+	```
+
+3. **Compile the extension:**
+	```sh
+	npm run compile
+	```
+
+4. **Launch in VS Code:**
+	- Open the folder in VS Code (`File > Open Folder...`).
+	- Press `F5` to start the Extension Development Host.
+	- The Code Digest sidebar will appear in the Activity Bar.
 
 ## Usage
 
-1. Open a workspace folder in VS Code
-2. Look for "Code Digest" in the Explorer sidebar
-3. Configure your options (or use defaults)
-4. Click "Generate Digest"
-5. The digest file will be created in your workspace root and opened automatically
-
-## Settings
-
-All settings can be configured through the sidebar UI or VS Code settings:
-
-- `codeDigest.outputFileName`: Output file name (default: "digest.txt")
-- `codeDigest.mode`: "curated" or "allText" (default: "curated")
-- `codeDigest.respectGitignore`: Honor .gitignore files (default: true)
-- `codeDigest.includeDotfiles`: Include dotfiles and config files (default: true)
-- `codeDigest.includeGitDir`: Include .git directory (default: false)
-- `codeDigest.maxFileSizeKB`: Max file size in KB (default: 10240)
-- `codeDigest.includeBinary`: Include binary files (default: false)
-- `codeDigest.additionalIncludeGlobs`: Extra patterns to include
-- `codeDigest.additionalExcludeGlobs`: Extra patterns to exclude
-- `codeDigest.markdownCodeFences`: Use code fences in .md files (default: false)
-
-## Output Format
-
-The generated digest follows the Gitingest format:
-
-1. **Summary**: Directory name, file count, timestamp, token estimate
-2. **Directory Structure**: Tree view of included files/directories
-3. **File Contents**: Each file with clear separators and headers
-
-## Modes
-
-### Curated Mode (Default)
-Includes common source code and configuration files:
-- Source code: .py, .js, .ts, .java, .cpp, .go, .rs, .swift, etc.
-- Config files: package.json, pyproject.toml, .gitignore, .env, etc.
-- Documentation: README, LICENSE, CHANGELOG files
-
-### All Text Mode
-Includes any file that appears to be text-based using content heuristics.
-
-## Commands
-
-- **Code Digest: Create Digest** (`codeDigest.create`): Generate a digest file
+1. **Open the Code Digest sidebar** from the Activity Bar.
+2. **Configure options:**
+	- Enter the output filename (without extension).
+	- Choose `.txt` or `.md` for the output file type.
+	- Select which file extensions to include.
+	- Adjust other options as needed (respect .gitignore, include dotfiles, etc.).
+3. **Click "Generate Digest"** to create the digest file.
+4. The digest will be saved to your workspace root and opened automatically.
+5. Use the **Refresh Extension** button to reload the sidebar if needed.
 
 ## Requirements
-
-- VS Code 1.85.0 or higher
-- Node.js 18+ (for development)
-
-## Known Limitations
-
-- Single workspace folder support (multi-root workspaces prompt for selection)
-- Symlinks are not followed, only noted as symlinks
-- Token estimation is a simple heuristic, not as accurate as tiktoken
-- Very large repositories may take some time to process
-
-## Security & Privacy
-
-- All processing happens locally
-- No network calls or external services
-- Respects .gitignore by default to avoid including secrets
-- Warns when including .git directory or binary files
+- [Node.js](https://nodejs.org/) (v18 or newer recommended)
+- [VS Code](https://code.visualstudio.com/) (v1.85.0 or newer recommended)
 
 ## Development
+- Source code is in the `src/` folder.
+- Webview assets are in `src/webview/`.
+- Utility logic is in `src/utils/`.
+- Build output is in the `out/` folder.
+
+## Contributing
+Pull requests and issues are welcome! Please open an issue for bugs or feature requests.
+
+## License
+MIT
+
+---
+
+**Quick Start:**
+1. Clone repo
+2. Run `npm install`
+3. Run `npm run compile`
+4. Press `F5` in VS Code
+5. Use the sidebar to generate your digest!
+### Curated Mode (Default)
 
